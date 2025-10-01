@@ -224,25 +224,6 @@ html,
 
 
 
-
-.made {
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.356);
-  position: relative;
-  top: 35px;
-  transition: 0.5s;
-}
-
-.made:hover {
-  color: var(--all_color);
-}
-
-
-
-
-
-
-
 @media (max-width: 490px) {
   .main {
     width: 90%;
