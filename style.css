@@ -219,13 +219,9 @@ html,
 }
 
 
-
-
-
-
-
 @media (max-width: 490px) {
   .main {
     width: 90%;
+    height: 600px;
   }
 }
