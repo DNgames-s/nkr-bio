@@ -43,7 +43,7 @@ class Rain {
   resize() {
     this.width = this.canvas.width = this.canvas.offsetWidth;
     this.height = this.canvas.height = this.canvas.offsetHeight;
-    this.createDrops(); // Пересоздаем капли при изменении размера
+    this.createDrops(); 
   }
 
   createDrops() {
@@ -58,7 +58,7 @@ class Rain {
     for (let i = 0; i < count; i++) {
       this.drops.push({
         x: Math.random() * this.width,
-        y: Math.random() * -this.height, // Начинаем выше экрана
+        y: Math.random() * -this.height, 
         speed:
           (Math.random() * 2 + 1) *
           (parseInt(
@@ -80,7 +80,7 @@ class Rain {
   }
 
   animate() {
-    // Создаем эффект размытия для шлейфа
+    
     this.ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
     this.ctx.fillRect(0, 0, this.width, this.height);
 
@@ -90,10 +90,10 @@ class Rain {
       ) || "rgba(255, 255, 255, 0.8)";
 
     for (let drop of this.drops) {
-      // Сохраняем позицию для шлейфа
+      
       drop.trail.push({ x: drop.x, y: drop.y });
 
-      // Ограничиваем длину шлейфа
+      
       const maxTrail =
         parseInt(
           getComputedStyle(document.documentElement).getPropertyValue(
@@ -104,7 +104,7 @@ class Rain {
         drop.trail.shift();
       }
 
-      // Рисуем шлейф
+      
       for (let i = 0; i < drop.trail.length; i++) {
         const point = drop.trail[i];
         const alpha = (i / drop.trail.length) * 0.3;
@@ -121,13 +121,13 @@ class Rain {
         this.ctx.fill();
       }
 
-      // Рисуем основную каплю
+      
       this.ctx.beginPath();
       this.ctx.arc(drop.x, drop.y, drop.size, 0, Math.PI * 2);
       this.ctx.fillStyle = rainColor;
       this.ctx.fill();
 
-      // Рисуем линию дождя (опционально)
+      
       this.ctx.beginPath();
       this.ctx.moveTo(drop.x, drop.y);
       this.ctx.lineTo(drop.x, drop.y - drop.length);
@@ -135,11 +135,11 @@ class Rain {
       this.ctx.lineWidth = drop.size / 2;
       this.ctx.stroke();
 
-      // Обновляем позицию
+      
       drop.y += drop.speed;
-      drop.x += Math.sin(drop.y * 0.01) * 0.5; // Легкое колебание
+      drop.x += Math.sin(drop.y * 0.01) * 0.5; 
 
-      // Если капля ушла за нижнюю границу, возвращаем её наверх
+      
       if (drop.y > this.height + 50) {
         drop.y = -20;
         drop.x = Math.random() * this.width;
@@ -150,8 +150,6 @@ class Rain {
     requestAnimationFrame(() => this.animate());
   }
 }
-
-// Инициализация при загрузке страницы
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("rain-canvas");
   new Rain(canvas);
